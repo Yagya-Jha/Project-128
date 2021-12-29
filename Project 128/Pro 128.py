@@ -8,7 +8,7 @@ import requests
 url = 'https://en.wikipedia.org/wiki/List_of_brown_dwarfs'
 page = requests.get(url)
 
-time.sleep(10)
+# time.sleep(10)
 
 header = ["Name", "Distance", "Mass", "Radius"]
 star_data = []
@@ -30,10 +30,11 @@ def scraep():
     radius = []
 
     for i in range(1, len(temp_list)):
-        name.append(temp_list[i][0])
-        distance.append(temp_list[i][5])
-        mass.append(temp_list[i][7])
-        radius.append(temp_list[i][8])
+        if not temp_list[i][0] == "" and not temp_list[i][5] == "" and not temp_list[i][7] == "" and not temp_list[i][8] == "":
+            name.append(temp_list[i][0])
+            distance.append(temp_list[i][5])
+            mass.append(temp_list[i][7])
+            radius.append(temp_list[i][8])
 
     df = pd.DataFrame(list(zip(name, distance, mass, radius)), columns=header)
     df.to_csv('scrapper.csv')
